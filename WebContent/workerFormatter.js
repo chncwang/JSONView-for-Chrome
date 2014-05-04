@@ -22,12 +22,18 @@ function valueToHTML(value) {
 		output += objectToHTML(value);
 	else if (valueType == "number")
 		output += decorateWithSpan(value, "type-number");
-	else if (valueType == "string")
-		if (/^(http|https):\/\/[^\s]+$/.test(value))
-			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
-		else
-			output += decorateWithSpan('"' + value + '"', "type-string");
-	else if (valueType == "boolean")
+                else if (valueType == "string")
+                if (/^(http|https):\/\/[^\s]+$/.test(value)) {
+                    var lastDotIndex = value.lastIndexOf(".");
+                    var suffix = value.substring(lastDotIndex + 1);
+                    if (suffix == "jpg" || suffix == "jpeg" || suffix == "png")
+                        output += decorateWithSpan('"', "type-string") + '<img src="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
+                    else
+                        output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
+                }
+                else
+                    output += decorateWithSpan('"' + value + '"', "type-string");
+                else if (valueType == "boolean")
 		output += decorateWithSpan(value, "type-boolean");
 
 	return output;
