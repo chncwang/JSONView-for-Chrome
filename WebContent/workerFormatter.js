@@ -26,8 +26,8 @@ function valueToHTML(value) {
                 if (/^(http|https):\/\/[^\s]+$/.test(value)) {
                     var lastDotIndex = value.lastIndexOf(".");
                     var suffix = value.substring(lastDotIndex + 1);
-                    if (suffix == "jpg" || suffix == "jpeg" || suffix == "png")
-                        output += decorateWithSpan('"', "type-string") + '<img src="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
+                    if (suffix == "jpg" || suffix == "jpeg" || suffix == "png" || suffix == "bmp")
+                        output += decorateWithSpan('"', "type-string") + '<img src="' + value + '"' + "height=400" + '>' + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
                     else
                         output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
                 }
